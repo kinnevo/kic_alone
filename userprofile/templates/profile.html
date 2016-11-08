@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>User Profile Update</title>{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Profile Update</h1>
+        <p class="lead">
+            Please review your information and carefully update it
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+            <div class="panel panel-default">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading">Your information is valuable to connect with our community</div>
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+
+<form method="post">
+  {% csrf_token %}
+  {{ user_form.as_p }}
+  {{ profile_form.as_p }}
+  <button type="submit">Save changes</button>
+</form>
+
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+             <div class="col-md-1"></div>
+        </div>
+      </div>
+</div>
+{% endblock %}
