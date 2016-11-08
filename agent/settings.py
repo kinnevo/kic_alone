@@ -102,9 +102,9 @@ WSGI_APPLICATION = 'agent.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kinnevo_agent',
-        'USER': 'kinnevo_user',
-        'PASSWORD': 'Cracatoa2016#',
+        'NAME': '_agent',
+        'USER': '########',
+        'PASSWORD': '########',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
