@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}<title> Blog </title>{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+      <div class="blog-header">
+        <br><br><br>&nbsp;&nbsp;&nbsp;
+        <h1 class="blog-title">The Kinnevo Blog</h1>
+        <p class="lead blog-description">Success Stories of great ideas on the field.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Is failure a way to learn?.</h2>
+            <p class="blog-post-meta">November 5, 2016 by <a href="#">Jorge</a></p>
+
+           <p>It is amazing how some ideas transform into really agents of change. <a href="http://fuckupnights.com/fastcompany-failure-has-never-been-more-successful/">Fuckup Nights</a> is one of those successes that started in one bar in 2013 where a group of friends launched an idea of presenting 3 failures cases in 7 minutes each to an audience eager to learn how things has gone wrong. The goal of sharing failures has several positive elements that allow the people to learn from other people experience, build trust and acknowledge that failing is no the end of the world.</p>
+           <p>You can find where the event is happening anywhere in the world and explore how you can participate in one of the events as speaker. If the event has not reach your city, you may want to be the promoter and organizer of the event. It is fun and rewarding to be involved in any way.</p>
+           <p>You can find in Internet a lot of references like the article published in <a href="https://www.fastcompany.com/3038446/innovation-agents/failure-has-never-been-more-successful">FastCompany: Faiule has never been more successful</a> or look for blogs and comments provided by the people involved.</p>
+           <p>Once you find that building a global event is feasible for people like you, you should think how a place like this would open ideas for everybody.</p>
+&nbsp;
+          </div><!-- /.blog-post -->
+
+          <nav>
+            <ul class="pager">
+              <li><a href="/blog">Previous</a></li>
+              <li><a href="/blog">Next</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>The Idea Warehouse is a product from Kinnevo Innovation Center
+            </p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">November 2016</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Learn More</h4>
+            <ol class="list-unstyled">
+              <li><a href="http://kinnevoinnovationcenter.com/">Kinnevo</a></li>
+              <li><a href="https://twitter.com/kinnevosv">Twitter</a></li>
+              <li><a href="https://www.facebook.com/groups/kinnevo/">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+{% endblock %}

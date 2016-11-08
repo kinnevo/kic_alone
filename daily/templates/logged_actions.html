@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+    <meta charset="UTF-8">
+    <script src="/static/bootstrap/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css">
+    <title>What you can do as a looged user</title>
+    <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+
+</head>
+<body>
+
+
+    <div>
+      {{ user }}
+      {% if user.is_anonymous %}
+      <a href="/login/">login</a>
+      {% else %}
+      <a href="/logout/">logout</a>
+      {% endif %}
+    </div>
+
+{% if user.is_authenticated %}
+    Name: {{ user.username }}
+
+{% else %}
+    Not logged in.
+{% endif %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+
+</body>
+</html>
+

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}<title> Blog </title>{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+      <div class="blog-header">
+        <br><br><br>&nbsp;&nbsp;&nbsp;
+        <h1 class="blog-title">The Kinnevo Blog</h1>
+        <p class="lead blog-description">Success Stories of great ideas on the field.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Building a beer subscription business.</h2>
+            <p class="blog-post-meta">November 1, 2016 by <a href="#">Jorge</a></p>
+
+            <p>I have been mentor of tenths of Startup Weekends events as well as individual persons that are looking how to start a subscription-based business. By all means, beers are one of such business. I found that the idea of a business is not new at all, you can Google <a href="https://www.google.com/search?q=subscription+beer">https://www.google.com/search?q=subscription+beer</a> and find millions of results, therefore you need to refine the concept in a way that open a business can be attractive to your customers and make a difference among all the competitors.</p>
+
+            <p>The process to test the idea become interesting when Rodrigo decide to build a prototype and explore what was interesting for potential customers, doing the validation of the concept, Rodrigo found that beers can be a status for people that like to build a collection of rare beers. Then, Rodrigo launched a campaign to get people interested in getting beers, first from all the states of his country. Then, he started to bring beers from countries of each continent. While the idea was developed, several elements came to the table, like having special editions of beers for specific seasons, like Christmas. Then special editions for events like football championships and more.</p>
+
+            <p>This simple idea that appears to be very well saturated in the market became to be a great business opportunity, where collectibles elements around the beer can be part of the game, like glasses, bottle openers, strays and more.</p>
+
+            <p>Lets explore how simple ideas have a great opportunities, then can you imagine how much more elaborated ideas can be part of the game.</p>
+&nbsp;
+          </div><!-- /.blog-post -->
+
+          <nav>
+            <ul class="pager">
+              <li><a href="/blog1">Previous</a></li>
+              <li><a href="/blog1">Next</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>The Idea Warehouse is a product from Kinnevo Innovation Center
+            </p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">November 2016</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Learn More</h4>
+            <ol class="list-unstyled">
+              <li><a href="http://kinnevoinnovationcenter.com/">Kinnevo</a></li>
+              <li><a href="https://twitter.com/kinnevosv">Twitter</a></li>
+              <li><a href="https://www.facebook.com/groups/kinnevo/">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+{% endblock %}

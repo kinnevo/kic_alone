@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% block title %}<title> Idea Report </title>{% endblock %}
+
+{% block content %}
+   <h1 class="page-header">Summary of ideas by author</h1>
+
+   <col width="130">
+
+
+      <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped tablesorter">
+              <thead>
+              <tr>
+                <th class="header" width="50"> Reference # <i class="icon-sort"></i></th>
+                <th class="header" width="130"> Author <i class="icon-sort"></i></th>
+                <th class="header" width="50"> Total Ideas <i class="icon-sort"></i></th>
+              </tr>
+          </thead>
+          <tbody>
+
+
+          {% for idea in ideas %}
+              <tr>
+                  <td>{{ forloop.counter }}</td>
+
+                  <td>{{ idea.author }}</td>
+                  <td align="right"><a href="search_by_author.htm?author={{idea.author}}" >{{ idea.author__count}}</a></td>
+
+              </tr>
+          {% endfor %}
+
+
+          </tbody>
+          </table>
+      </div>
+
+
+{% endblock %}
