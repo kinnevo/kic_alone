@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.db import models
 
-from models import Ideas
+from models import *
 
 from datetime import date
 import time
@@ -46,14 +46,21 @@ def getideas(request):
 
     if request.method == 'POST':
         idea = request.POST.get('idea')
+        category = request.POST.get('category')
+        comment = request.POST.get('comment')
+
 #        author = request.POST.get( 'author')
+#        author = "Jorge"
         date_now = date.today()
 #        date_now = time.strftime("%c")
 
-#        author = "Jorge"
 
-        i = Ideas(date=date_now, author=author, description=idea)
+        i = Ideas(date=date_now, author=author, description=idea, votes=0)
         i.save()
+
+#        j = IdeaComment(comment=comment )
+#        j.save()
+# category=category
 
         ideas = Ideas.objects.order_by('description').all()
 
@@ -123,3 +130,77 @@ def idea_delete(request, pk, template_name='ideas/idea_confirm_delete.html'):
         ideas.delete()
         return redirect('report')
     return render(request, template_name, {'object':ideas})
+
+from .forms import IdeaForm, CommentForm, CategoryForm
+
+def new_idea(request):
+    if request.user.is_authenticated:
+        author = request.user
+
+        if request.method == 'POST':
+            form1 = IdeaForm(request.POST)
+            form3 = CategoryForm(request.POST)
+
+            if form1.is_valid()  and form3.is_valid():
+                today = date.today()
+                author = request.user
+                idea = request.POST.get('description')
+
+                i_idea = Ideas( author=author, description=idea,votes=0, date=today)
+                i_idea.save()
+
+                category = request.POST.get('category')
+
+                i_category = IdeaCategory(category=category, idea=i_idea)
+                i_category.save()
+
+                return render(request, 'new_idea.html', {'form1': form1})
+        else:
+            form1 = IdeaForm()
+#            form2 = CommentForm()
+            form3 = CategoryForm()
+            return render(request, 'new_idea.html', {'form1': form1, 'form3' : form3})
+
+    else:
+        return redirect('/login/?next=/daily/new_idea')
+
+def nurture_idea(request, pk, template_name='ideas/nurture_idea.html'):
+    if request.user.is_authenticated:
+
+#    print "PK in nurture_idea: ", pk
+
+        idea_ref = get_object_or_404(Ideas, pk=pk)
+
+        comments = IdeaComment.objects.filter(idea=pk).all()
+        count = IdeaComment.objects.filter(idea=pk).all().count()
+        author = request.user.username
+
+        categories = IdeaCategory.objects.filter(idea=pk).all()
+        category = ""
+        first_category = True
+        for cat in categories:
+            if first_category == True:
+                category = cat.category
+                first_category = False
+            else:
+                category =  category + ", " + cat.category
+    #    print "xxx: ",category
+
+    #    child_of_bob = Child.objects.get(parent__name="Bob")
+    #    for c in comments:
+    #        print c.comment
+
+        if request.method == 'POST':
+            comment = request.POST.get('comment')
+            if (comment <> ""):
+                i_comment = IdeaComment(comment=comment, idea=idea_ref, author=author )
+                i_comment.save()
+            else:
+                print "PPPPPPOST: No hay comentario"
+
+            return render(request, template_name, {'idea': idea_ref, 'count': count, 'comments' : comments,  'category' : category })
+        else:
+            return render(request, template_name, {'idea': idea_ref, 'count': count, 'comments' : comments , 'category' : category})
+
+    else:
+        return redirect('/login/?next=/daily/report')

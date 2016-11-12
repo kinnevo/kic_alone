@@ -12,6 +12,7 @@ class Ideas(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
+    votes = models.IntegerField()
 
     def __unicode__(self):
         return self.description
@@ -20,3 +21,13 @@ class Ideas(models.Model):
         return reverse('idea_edit', kwargs={'pk': self.pk})
 
 
+class IdeaComment(models.Model):
+    idea = models.ForeignKey(Ideas, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    author = models.TextField(max_length=50)
+    comment = models.CharField(max_length=250)
+
+class IdeaCategory(models.Model):
+    idea = models.ForeignKey(Ideas, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    category = models.CharField(max_length=30)

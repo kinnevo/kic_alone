@@ -1,0 +1,13 @@
+  cd PycharmProjects/
+  cd agent/
+  source bin/activate
+  cd kic_alone/
+  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin/
+  pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+
+  python manage.py makemigrations
+  python manage.py migrate
+  
+  python manage.py runserver
+
+  python manage.py migrate

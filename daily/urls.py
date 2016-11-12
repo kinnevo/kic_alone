@@ -14,5 +14,8 @@ urlpatterns = [
     url(r'^search_by_author', views.search_by_author, name='search_by_author'),
     url(r'^idea_edit/(?P<pk>\d+)$', views.idea_update, name='idea_edit'),
     url(r'^idea_delete/(?P<pk>\d+)$', views.idea_delete, name='idea_delete'),
+    url(r'^new_idea$', views.new_idea, name='new_idea'),
+
+    url(r'^nurture_idea/(?P<pk>\d+)$', views.nurture_idea, name='nurture_idea'),
 
 ]

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}<title> Review and Nurture Ideas </title>{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1>You can review and idea from: {{idea.author}} </h1>
+        <p class="lead">
+            Review, comment and explore this idea to find a new subject of interest for you
+        </p>
+    </div>
+    <div class="row">
+      <div class="col-md-12" >
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+            <div class="panel panel-default">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading">This idea was created in {{idea.date}}, it has {{ count }} comments and is registered under these categories: {{ category }}</div>
+                  <div class="panel-body">
+                    <p>{{idea.description}}</p>
+                  </div>
+
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped tablesorter">
+                          <thead>
+                            <tr>
+                              <th>Date Comment</th>
+                              <th>Author</th>
+                              <th>Comment</th>
+                            </tr>
+                          </thead>
+
+                            {% for comment in comments %}
+
+                              <tbody>
+                                <tr>
+                                    <td>{{  comment.created }}</td>
+                                    <td>{{  comment.author }}</td>
+                                    <td>{{  comment.comment }}</td>
+
+                                </tr>
+                              </tbody>
+
+                            {% endfor %}
+
+                        </table>
+                    </div>
+
+                          <form class="form-signin" id="comment_form" method="post" action="{{ request.path  }}">
+
+                            {% csrf_token %}
+
+                            <br>
+
+                            <textarea rows="4" cols="50"  name="comment" class="form-control" placeholder="Provide a comment for the idea" value="" autofocus></textarea>
+
+                            <br>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit a comment</button>
+                          </form>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-1"></div>
+
+
+    </div>
+</div>
+{% endblock %}

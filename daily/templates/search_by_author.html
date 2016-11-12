@@ -51,9 +51,9 @@
 
                       <tbody>
                         <tr>
-                          <td>{{ forloop.counter }}</td>
+                          <td>{{ forloop.counter}}</td>
                           <td>{{  idea.date }}</td>
-                          <td>{{  idea.description }}</td>
+                          <td><a href="{% url "nurture_idea" idea.idea_id %}"> {{  idea.description }}</a></td>
                           {% if user.is_superuser%}
                               <td><a href="{% url "idea_edit" idea.idea_id   %}">Edit</a></td>
                               <td><a href="{% url "idea_delete" idea.idea_id %}">Delete</a></td>
