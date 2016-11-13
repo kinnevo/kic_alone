@@ -12,7 +12,7 @@ class Ideas(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
-    votes = models.IntegerField()
+    votes = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.description
