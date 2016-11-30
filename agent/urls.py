@@ -31,6 +31,14 @@ urlpatterns = [
     url(r'^servers/', include('servers.urls')),
     url(r'^books_fbv_user/', include('books_fbv_user.urls')),
     url(r'^userprofile/', include('userprofile.urls')),
+    url(r'^facebook/', include('thirdauth.urls')),
+
+    url(r'^stats/', include('stats.urls')),
+
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
+
+
 
     url(r'^index1', views.index1, name='index1'),
     url(r'^home/', views.home, name='home'),

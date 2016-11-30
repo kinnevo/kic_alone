@@ -57,12 +57,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'social.apps.django_app.default',
     'daily',
     'bootstrap3',
     'jquery',
     'servers',
     'books_fbv_user',
     'userprofile',
+    'stats',
+    'thirdauth',
+
 ]
 
 MIDDLEWARE = [
@@ -77,6 +81,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'agent.urls'
 
+AUTHENTICATION_BACKENDS = (
+   'social.backends.facebook.FacebookOAuth2',
+   'social.backends.google.GoogleOAuth2',
+   'social.backends.twitter.TwitterOAuth',
+   'django.contrib.auth.backends.ModelBackend',
+)
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -88,11 +100,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
 ]
-
 
 
 WSGI_APPLICATION = 'agent.wsgi.application'
@@ -146,6 +159,43 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/daily/profile'
 
+###### LOGIN_REDIRECT_URL = '/djsite'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '564668350402270'
+SOCIAL_AUTH_FACEBOOK_SECRET = '30c31e0db9e578a8103f9871f002b454'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '8507...kg6.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'gUzw...CD32-'
+
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
 
 
+import os.path
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 
+
+#import sys
+#print sys.path#
+import agent
+
+#import sys
+#for p in sys.path: print p
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'userprofile.models.save_profile',  # <--- set the path to the function
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)

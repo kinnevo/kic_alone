@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from django.db import models
+from django.http import JsonResponse
+import json
+from django.db.models import Count, Min, Sum, Avg
+
+
 
 from models import *
 
@@ -204,3 +209,61 @@ def nurture_idea(request, pk, template_name='ideas/nurture_idea.html'):
 
     else:
         return redirect('/login/?next=/daily/report')
+
+
+
+def ajax1(request):
+    return render(request, 'ajax1.html', {'stats': 'stats_info' , 'json_string' : 'json_string'}, content_type='text/html')
+
+from models import Ideas
+from django.db.models import Count
+
+
+
+
+"""
+    data.append( {'category': "XXX", 'measure' : 0.30})
+    data.append( {'category': "Peter", 'measure' : 0.25})
+    data.append( {'category': "John", 'measure' : 0.15})
+    data.append( {'category': "Rick", 'measure' : 0.05})
+    data.append( {'category': "Lenny", 'measure' : 0.18})
+    data.append( {'category': "Paul", 'measure' :0.04})
+    data.append( {'category': "Steve", 'measure' : 0.03})
+"""
+def refresh1(request):
+
+    data = []
+
+    authors = Ideas.objects.annotate(num_ideas=Count('author', distinct=True)).order_by('author')
+#    print "Counter: ", authors[0].author__count, "\n"
+#    for idea in authors:
+#        print idea.num_ideas, idea.author
+
+#        print authors[0].num_ideas, authors[0].author
+
+    authors = Ideas.objects.all().aggregate(Count('author'))
+    total_ideas = authors['author__count']
+#    print "Total number of ideas: ", total_ideas
+
+ #   a = Ideas.objects.all()
+
+    b = Ideas.objects.values('author').annotate(count=Count('author'))[:5]
+
+#    print authors, "\na: ", a, "\nb: ", b
+
+    partial = 0
+    for x in b:
+        partial += x['count']
+#        print "Author: ", x['author'], ":", x['count']
+#        print "Author: ", x.author, ":", x.count
+        data.append( {'category': x['author'] , 'measure' : x['count']})
+
+    difference = total_ideas - partial
+#    print "Partial: ",  partial, "difference", difference
+    data.append( {'category': 'others' , 'measure' : difference })
+
+#    json_string = json.dumps(data)
+
+#    json_data = { 'data' : data, 'ideas' : total_ideas}
+
+    return JsonResponse(json.dumps(data), safe=False)

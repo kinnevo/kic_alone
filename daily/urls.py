@@ -16,6 +16,10 @@ urlpatterns = [
     url(r'^idea_delete/(?P<pk>\d+)$', views.idea_delete, name='idea_delete'),
     url(r'^new_idea$', views.new_idea, name='new_idea'),
 
+    url(r'^ajax1', views.ajax1, name='ajax1'),
+    url(r'^refresh1', views.refresh1, name='refresh1'),
+
+
     url(r'^nurture_idea/(?P<pk>\d+)$', views.nurture_idea, name='nurture_idea'),
 
 ]

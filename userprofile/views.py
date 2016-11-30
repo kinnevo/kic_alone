@@ -32,3 +32,18 @@ def update_profile(request):
 #
 #   to get the user ---- users = User.objects.all().select_related('profile')
 #
+
+import sys
+
+def social_login(request):
+#    print request
+
+#    print "2) SYSPATH; ", sys.path
+    context = ( {'request': request, 'user': request.user})
+
+    if request.user.is_authenticated:
+        print "userprofile:social_login", request.user
+    else:
+        print "please login"
+
+    return render(request, 'facebook.html', context, content_type='text/html')

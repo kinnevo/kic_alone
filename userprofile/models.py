@@ -25,3 +25,23 @@ def save_user_profile(sender, instance, **kwargs):
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('bio', 'location',)
 
+def save_profile(backend, user, response, *args, **kwargs):
+#    print "SAVE"
+    if backend.name == 'facebook':
+#        print "backend facebook"
+        profile = Profile.objects.get(pk=user.id)
+
+        if profile is None:
+            profile = Profile(user_id=user.id)
+#        else:
+#            print "Profile", profile
+#        print "Email: ", response.get('email')
+#        print "user obj: ", user
+
+        profile.email = response.get('email')
+
+#        profile.gender = response.get('gender')
+#        profile.link = response.get('link')
+#        profile.timezone = response.get('timezone')
+#        print "profile: ", profile
+        profile.save()
